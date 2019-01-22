@@ -272,7 +272,7 @@
 .booking {
   position: relative;
   width: 50%;
-  height: 350px;
+  height: 370px;
   left: 25%;
   top: 30%;
   background-color: #2F3236;
@@ -358,13 +358,122 @@ input[type=radio]:hover {
   margin-bottom: 3%;
 }
 
-
 .session-options {
   background-color: #2F3236;
 }
 
+.add-sport
+{
+  position: relative;
+  background-color: #2F3236;
+  width: 39%;
+  height: 420px;
+  left: 30%;
+  top: 23%;
+  border-radius: 12px;
+}
 
+.add-sport-form {
+  margin-top: 2%;
+  padding: 20px 20px;
+  margin: 10px;
+}
 
+.add-sport-form input[type=file] {
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.add-sport-form textarea {
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 12px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  height: 100px;
+}
+
+.add-sport-form textarea:hover,.add-venue-form textarea:hover,#sport-name:hover,#place-name:hover,input[type=file]:hover,#cancel-add-sport:hover,#add-sport-button:hover,#price:hover,#maxteama:hover,#maxteamb:hover {
+  transform: scale(1.1);
+}
+
+#sport-name,#place-name {
+  color: white;
+  padding: 14px 20px;
+  margin: 2px 0px;
+  margin-bottom: 5%; 
+  box-sizing: border-box;
+  width: 90%;
+  border-radius: 12px;
+  background : transparent; 
+  border-color: white;
+  margin-left: 5%;
+}
+
+#cancel-add-sport,#add-sport-button {
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  margin-bottom: 6%; 
+  box-sizing: border-box;
+  width: 40%;
+  border-radius: 12px;
+  background : transparent; 
+}
+
+.add-venue {
+  position: relative;
+  background-color: #2F3236;
+  width: 39%;
+  height: 550px;
+  left: 30%;
+  top: 23%;
+  border-radius: 12px;
+}
+
+.add-venue-form {
+  margin-top: 2%;
+  padding: 20px 20px;
+  margin: 10px;
+}
+
+.add-venue-form input[type=file] {
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.add-venue-form textarea {
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 12px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  height: 100px;
+}
+
+#price {
+  background: transparent;
+  margin-top: 3%;
+  width: 90%;
+  padding: 14px 20px;
+  margin: 10px 0;
+  margin-bottom: 6%; 
+  box-sizing: border-box;
+  border-radius: 12px;
+  margin-left: 5%;
+  color: white;
+}
+
+#maxteama,#maxteamb {
+  background: transparent;
+  border-radius: 12px;
+  margin-left: 5%;
+  width: 40%;
+  color: white;
+  padding: 14px 5px;
+}
 
 
 
@@ -396,10 +505,6 @@ input[type=radio]:hover {
 
 #login-as-admin,#login-as-user,#cancel-button {
   padding: 10px 20px;
-}
-
-.footer {   
-  margin-top: 0%;  
 }
 
 .footer p {
@@ -540,7 +645,7 @@ input[type=radio]:hover {
 @media(min-width: 1366px) {
 
 .back-img{
-  height: 690px;
+  height: 660px;
 }
 
 .login-box {
@@ -569,6 +674,7 @@ input[type=radio]:hover {
 }
 
 .footer p {
+  margin-top: 2%;
   font-size: 35px;
   margin-right: 5%;
 } 
