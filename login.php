@@ -1,3 +1,32 @@
+<?php
+  include('function.php');
+  $func=new dbfunction();
+  if(isset($_POST['userlogin']))
+  {
+      $name=$_POST['username'];
+      $password=$_POST['password'];
+
+      $con=$func->connection();
+      if($con)
+      {
+        $func->loginValidation($name, $password, $con);
+      }
+  }
+
+  if(isset($_POST['adminlogin']))
+  {
+    $name=$_POST['username'];
+    $password=$_POST['password'];
+
+    $con=$func->connection();
+    if($con)
+    {
+      $func->adminloginValidation($name, $password, $con);
+    }
+  }
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +39,18 @@
   <header class="header">
     <nav class="nav-bar">
       <p>Play for Fun</p>
-      <a href="signup.html">SignUp</a>
+      <a href="signup.php">SignUp</a>
     </nav>
   </header>
 
   <main  class="back-img">
     <div class="login-box">
       <img class="user-img" src="images\user.png">
-      <form class="login" method="post" action="#">
-        <input type="text" placeholder="Enter Username" id="Username" required>
-        <input type="password" placeholder="Enter Password" id="Password" required>
-    	  <button type="submit" id="login-as-admin" style="float: left;width: 45%;">Login as Admin</button>
-        <button type="login" id="login-as-user" style="float: right;width: 45%;">Login as User</button>
+      <form class="login" method="post" action="" autocomplete="off">
+        <input type="text" placeholder="Enter Username" id="Username" name="username" required>
+        <input type="password" placeholder="Enter Password" id="Password" name="password" required>
+    	  <button type="submit" id="login-as-admin" name="adminlogin" style="float: left;width: 45%;">Login as Admin</button>
+        <button type="login" id="login-as-user" name="userlogin" style="float: right;width: 45%;">Login as User</button>
         <div>
     	   <button type="button" id="cancel-button">Cancel</button>
         </div>

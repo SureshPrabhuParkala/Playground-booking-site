@@ -3,12 +3,16 @@
   padding: 0;
 }
 
+body{
+  margin:0px;
+}
 #Username,#Password,#email,#phone {
   width: 100%;
   display: inline-block;
   box-sizing: border-box;
   background: transparent;
   border-radius: 12px;
+  color: white;
 }
 
 #email,#phone {
@@ -91,43 +95,58 @@
   border-color: black;
 }
 
-.col{
-  float: left;
-  width: 30%;
-  padding: 10px;
-}
-
-.row{
-  float: left;
-  display: table;
-}
-
-.details-about-sport p {
+.details-about-sport {
    font-size: 20px;
    font-family: cursive;
    margin-left: 5%;
    margin-right: 5%;
+   margin-top: 2%;
    text-align: justify;
+   height: auto;
 }
 
-.details-about-sport img {
+/*details-about-sport img {
    width: 400px;
    height: 240px;
    margin-right: 10%;
    margin-top: 25px;
    border: 1px solid black;
    float: left;
+   position: relative;
+}*/
+.left{
+  width:40%;
+  float:left;
 }
-
-.sports-list {
-  float: left;
-  padding: 20px;
+.right{
+  width:90%;
+  font-size: 20px;
+   font-family: cursive;
+   margin-left: 5%;
+   margin-right: 5%;
+   margin-top: 2%;
+   text-align: justify;
+   height: auto;
+  /*float:left;*/
+}
+.detail-img {
+   width: 400px;
+   height: 240px;
+   margin-right: 10%;
+   margin-top: 5px;
+   margin-left: 15%;
+   border: 1px solid black;
+   float: left;
+   position: relative;
 }
 
 .sports {
-  margin-left: 10%;
+  margin-left: 5%;
   display: table;
-  margin-top: 1%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  float: left;
+  position: relative;
 }
 
 .login a {
@@ -142,7 +161,7 @@
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
+  padding: 13px;
   text-align: center;
   background-color: #f1f1f1;
   width: 300px;
@@ -155,7 +174,7 @@
   border: 2px solid black;
 }
 
-.card:hover,#Username:hover,#Password:hover,#login-as-admin:hover,#login-as-user:hover,#cancel-button:hover,.book-now:hover,#email:hover,#phone:hover,#register:hover, #register-cancel:hover {
+.card:hover,#Username:hover,#Password:hover,#login-as-admin:hover,#login-as-user:hover,#cancel-button:hover,.book-now:hover,#email:hover,#phone:hover,#registerhover, #register-cancel:hover, .submit:hover {
   -webkit-transform: scale(1.1);
 }
 
@@ -230,6 +249,7 @@
 #venue {
   width: auto;
   height: 45px;
+  padding: 10px;
   border-radius: 12px;
   border-color: black;
   background: transparent;
@@ -240,12 +260,13 @@
 
 .venue-selector {
   position: relative;
-  width: 30%;
-  height: 220px;
-  left: 35%;
-  top: 25%;
+  width: 40%;
+  height: 250px;
+  left: 30%;
+  top: 10%;
   background : rgba(87,71,83,0.5);
   border-radius: 12px;
+  margin-bottom: 2%;
 }
 
 .venue-place-option-value {
@@ -253,20 +274,17 @@
 }
 
 .submit {
-  float: left;
-  margin-top: 5%;
-  margin-bottom: 5%;
   background: transparent;
   color: white;
   border-color: black;
   border-radius: 12px;
   width: 40%;
-  height: 30px;
+  height: 40px;
 }
 
 .venue-dropdown {
   padding: 5%;
-  margin-top: 10%;
+  margin-top: 45%;
 }
 
 .booking {
@@ -274,13 +292,14 @@
   width: 50%;
   height: 370px;
   left: 25%;
-  top: 30%;
+  top: 40%;
   background-color: #2F3236;
   border-radius: 15px;
   font-weight: bold;
   color: white;
   font-size: 20px;
   font-family: cursive;
+  margin-bottom: 2%;  
 }
 
 .book-now {
@@ -299,7 +318,7 @@ input[type=radio]:hover {
 
 .booking-form {
   padding: 5%;
-  margin-top: 10%;
+  margin-top: 15%;
 }
 
 .done-image {
@@ -317,8 +336,17 @@ input[type=radio]:hover {
   margin-bottom: 2%;
 }
 
-.stadium-details p {
+/*.stadium-details p {
    font-size: 20px;
+   font-family: cursive;
+   margin-left: 5%;
+   margin-top: 1%;
+   margin-right: 5%;
+   text-align: justify;
+}*/
+
+.desc {
+  font-size: 20px;
    font-family: cursive;
    margin-left: 5%;
    margin-top: 1%;
@@ -326,14 +354,14 @@ input[type=radio]:hover {
    text-align: justify;
 }
 
-.stadium-details img {
+/*.stadium-details img {
   width: 400px;
   height: 240px;
   margin-right: 10%;
   margin-top: 25px;
   border: 1px solid black;
   float: left;
-}
+}*/
 
 .radio-button {
   padding: 4%;
@@ -371,6 +399,7 @@ input[type=radio]:hover {
   left: 30%;
   top: 23%;
   border-radius: 12px;
+  margin-bottom: 2%;
 }
 
 .add-sport-form {
@@ -394,19 +423,30 @@ input[type=radio]:hover {
   height: 100px;
 }
 
-.add-sport-form textarea:hover,.add-venue-form textarea:hover,#sport-name:hover,#place-name:hover,input[type=file]:hover,#cancel-add-sport:hover,#add-sport-button:hover,#price:hover,#maxteama:hover,#maxteamb:hover {
+.add-sport-form textarea:hover,.add-venue-form textarea:hover,#sports-list:hover,#sport-name:hover,#place-name:hover,#venue-name:hover,input[type=file]:hover,#cancel-add-sport:hover,#add-sport-button:hover,#price:hover,#maxplayers:hover {
   transform: scale(1.1);
 }
 
-#sport-name,#place-name {
+#sport-name,#place-name,#venue-name {
   color: white;
   padding: 14px 20px;
-  margin: 2px 0px;
   margin-bottom: 5%; 
   box-sizing: border-box;
   width: 90%;
   border-radius: 12px;
   background : transparent; 
+  border-color: white;
+  margin-left: 5%;
+}
+
+#sports-list {
+  color: white;
+  padding: 14px 20px;
+  margin-bottom: 3%;
+  box-sizing: border-box;
+  width: 90%;
+  border-radius: 12px;
+  background: transparent;
   border-color: white;
   margin-left: 5%;
 }
@@ -425,11 +465,12 @@ input[type=radio]:hover {
 .add-venue {
   position: relative;
   background-color: #2F3236;
-  width: 39%;
-  height: 550px;
-  left: 30%;
+  width: 44%;
+  height: 715px;
+  left: 27%;
   top: 23%;
   border-radius: 12px;
+  margin-bottom: 2%;
 }
 
 .add-venue-form {
@@ -455,24 +496,25 @@ input[type=radio]:hover {
 
 #price {
   background: transparent;
-  margin-top: 3%;
   width: 90%;
   padding: 14px 20px;
   margin: 10px 0;
-  margin-bottom: 6%; 
+  margin-bottom: 4%;
   box-sizing: border-box;
   border-radius: 12px;
   margin-left: 5%;
   color: white;
 }
 
-#maxteama,#maxteamb {
+#maxplayers {
   background: transparent;
   border-radius: 12px;
+  box-sizing: border-box;
   margin-left: 5%;
-  width: 40%;
+  width: 90%;
   color: white;
-  padding: 14px 5px;
+  margin-bottom: 5%;
+  padding: 14px 20px;
 }
 
 
@@ -518,6 +560,7 @@ input[type=radio]:hover {
 
 .register-box {
   margin-top: 10%;
+  margin-bottom: 2%;
 }
 
 .register-img{  
@@ -591,7 +634,7 @@ input[type=radio]:hover {
 }
 
 .submit {
-  margin-top: 12%;
+  margin-top: 7%;
 }
 
 .footer p {
@@ -674,7 +717,6 @@ input[type=radio]:hover {
 }
 
 .footer p {
-  margin-top: 2%;
   font-size: 35px;
   margin-right: 5%;
 } 

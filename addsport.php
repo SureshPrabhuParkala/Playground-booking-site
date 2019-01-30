@@ -1,3 +1,23 @@
+<?php
+  include('function.php');
+  $func=new dbfunction();
+  if(isset($_POST['add'])) 
+  {
+    $filename=$_FILES["file"]["name"];
+    $name=$_POST['name'];
+    $details=$_POST['details'];
+
+    $con=$func->connection();
+    if($con)
+    {
+      $func->uploadsport($name, $details, $filename, $con);
+    }
+  }
+?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,20 +28,20 @@
 	<header class="header">
 		<nav class="nav-bar">
   			<p>Play for Fun</p>
-  			<a href="index.html">Logout</a>
-        <a href="addvenue.html">Add Venue</a>	
+  			<a href="index.php">Logout</a>
+        <a href="addvenue.php">Add Venue</a>	
 		</nav>
 	</header>
 
 	<main>
 		<div class="add-sport">
       <p style="font-family: cursive;color: white;font-size: 40px;margin-top: 3%;margin-left: 10%;">Add sport</p>
-      		<form class="add-sport-form" method="post" action="#">
-        		<input type="text" placeholder="Enter Sport Name" id="sport-name" required>
-        		<textarea placeholder="Enter the Details" required></textarea>
-            <center><input type="file" name="images" style="color: white;" required></center>
+      		<form class="add-sport-form" method="post" action="" enctype="multipart/form-data">
+        		<input type="text" placeholder="Enter Sport Name" id="sport-name" name="name" required autocomplete="off">
+        		<textarea placeholder="Enter the Details" name="details" required></textarea>
+            <center><input type="file" name="file" style="color: white;" required></center>
         		<div>
-              <button type="submit" id="add-sport-button" style="float: left;margin-left: 5%;">Add</button>
+              <button type="submit" id="add-sport-button" name="add" style="float: left;margin-left: 5%;">Add</button>
               <button type="Cancel" id="cancel-add-sport" style="float: right;margin-right: 5%;">Cancel</button>
         		</div>
         	</form>

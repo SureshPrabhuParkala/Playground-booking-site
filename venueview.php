@@ -1,3 +1,11 @@
+<?php
+	include('function.php');
+	$func=new dbfunction();
+    $con=$func->connection();
+    $id=$_GET['id'];
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,19 +16,25 @@
 	<header class="header">
 		<nav class="nav-bar">
   			<p>Play for Fun</p>
-  			<a href="signup.html">SignUp</a>
-  			<a href="login.html">Login</a>	
+  			<a href="signup.php">SignUp</a>
+  			<a href="login.php">Login</a>	
 		</nav>
 	</header>
 
 	<main class="stadium-details">
-		<p><img src="images/chinnaswamybangalore.jpg" alt="M Chinnaswamy Stadium">
-		<b style="font-size: 40px;">The M. Chinnaswamy Stadium, (Kannada: ಎಂ ಚಿನ್ನಸ್ವಾಮಿ ಕ್ರೀಡಾಂಗಣ)</b> located in Bengaluru, Karnataka, is a stadium owned by the Government of Karnataka. Flanked by the picturesque Cubbon Park, Queen's Road, Cubbon and uptown MG Road, this four decade old stadium is situated in the heart of the city of Bengaluru. Formerly known as the Karnataka State Cricket Association (KSCA) stadium, the stadium was later rechristened in tribute to Mr. Mangalam Chinnaswamy, who had served the KSCA for four decades and was also president of the Board of Control for Cricket in India (BCCI) from 1977–1980. This stadium with a seating capacity of around 40,000[2] not only regularly hosts Test cricket, One Day Internationals (ODI) and other First-class cricket matches, but also other musical and cultural events. The stadium is also the home ground of the Karnataka state cricket team and the Indian Premier League franchise Royal Challengers Bangalore. It is owned by the Government of Karnataka and has been leased out to the KSCA for a period of 99 years.</p>
-
-		<p>Maximum Players</p>
-		<p>Team A : 11</p>
-		<p>Team B : 11</p>
-		<p>Amount : <b style="color: red;">Free</b></p>
+		<?php
+			$q="SELECT * FROM venue WHERE venue_id='$id'";
+			$result=mysqli_query($con,$q);
+			$row=$result->fetch_assoc();
+			echo "<main><div style='height:215px;'>
+        	<div class='left'><img class='detail-img' src='".$row['venue_image']."' alt='".$row['venue_name']."'></div>
+        	<div class='right'><p class='desc'>".$row['venue_description']."</p></div></div>";
+        	$player=$row['maximum_players']/2;
+			echo "<p class='desc' style='margin-top: 5%;font-weight: bold;'>Maximum Players:</p>
+				  <p class='desc'>Team A : ".$player."</p>
+				  <p class='desc'>Team B : ".$player."</p>
+				  <p class='desc'>Amount : <b style='color: red;'>".$row['price']."</b></p>";	
+		?>
 
 		<div class="booking">
   			<form action="#" class="booking-form" method="get">
