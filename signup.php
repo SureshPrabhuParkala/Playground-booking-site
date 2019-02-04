@@ -34,8 +34,8 @@
 <body>
 	<header class="header">
 		<nav class="nav-bar">
-  			<p>Play for Fun</p>
-  			<a href="login.php">Login</a>	
+  			<a class="logo" href="index.php">Play for Fun</p>
+  			<a class="nav_bar" href="login.php">Login</a>	
 		</nav>
 	</header>
 
@@ -52,7 +52,7 @@
         		<input type="Password" placeholder="Enter Password" id="Password" name="Password" required style="border-color: black;">
 
     	 		  <button type="submit" id="register" name="submit" style="float: left;">Register</button>
-        		<button type="Cancel" id="register-cancel" onclick="index.php;" style="float: right;">Cancel</button>
+        		<a href="index.php"><button type="button" id="register-cancel" style="float: right;">Cancel</button></a>
 
         		<a href="login.html" class="already-registered"><center>Already Rgistered? Login</center></a>
 

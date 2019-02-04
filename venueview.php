@@ -3,6 +3,24 @@
 	$func=new dbfunction();
     $con=$func->connection();
     $id=$_GET['id'];
+    $pid=$_GET['pid'];
+    session_start();
+    if(isset($_POST['book_now']))
+    {
+    	if(isset($_SESSION['login_user']))
+    	{
+    		$team=$_POST['team'];
+    		$date=$_POST['date'];
+    		$session=$_POST['session'];
+    		$number=$_POST['no_of_person'];
+    		$venueid=$id;
+    		$sportsid=$pid;
+
+    		$func->booking($_SESSION['login_id'], $_SESSION['login_user'], $sportsid, $venueid, $date, $team, $session, $team, $number, $con);
+    	}
+    	else
+    		header('location: login.php');
+    }
 ?>
 
 
@@ -15,9 +33,19 @@
 <body>
 	<header class="header">
 		<nav class="nav-bar">
-  			<p>Play for Fun</p>
-  			<a href="signup.php">SignUp</a>
-  			<a href="login.php">Login</a>	
+  			<a class="logo" href="sportview.php?id=<?php echo $pid;?>">Play for Fun</p>
+  			<?php
+  				if(isset($_SESSION['login_user']))
+  				{
+  					echo "<a class='nav_bar' href='logout.php'>Logout</a>
+          				  <a class='nav_bar'>".$_SESSION['login_user']."</a>";
+          		}
+          		else
+          		{
+  					echo "<a class='nav_bar' href='signup.php'>SignUp</a>
+  						  <a class='nav_bar' href='login.php'>Login</a>";	
+          		}
+          	?>
 		</nav>
 	</header>
 
@@ -33,36 +61,38 @@
 			echo "<p class='desc' style='margin-top: 5%;font-weight: bold;'>Maximum Players:</p>
 				  <p class='desc'>Team A : ".$player."</p>
 				  <p class='desc'>Team B : ".$player."</p>
-				  <p class='desc'>Amount : <b style='color: red;'>".$row['price']."</b></p>";	
-		?>
+				  <p class='desc'>Amount : <b style='color: red;'>".$row['price']."/- Per Head</b></p>";
 
-		<div class="booking">
-  			<form action="#" class="booking-form" method="get">
-    			<p>Choose Your Team:</p>
-    			<div class="radio-button">
-    				<input type="radio" value="TeamA" name="Team"> Team A(11)
-					<input type="radio" value="TeamB"  name="Team" style="margin-left: 25%;"> Team B(11)
-				</div>
-				<div>
-					<p style="margin-left: 5%">Date: <input type="date" name="date">
-					  <b style="margin-left: 3%;">Session: </b><select id="session">
-    								<option value="morning" class="session-options">Morning (7am to 10am)</option>
-    								<option value="afternoon" class="session-options">Afternoon (11am to 2pm)</option>
-    								<option value="evening" class="session-options">Evening (3pm to 6pm)</option>
-  								</select>
-  					</p>
-				</div>
-				<div>
-					<center>Amount:<b style="margin-left: 2%;color: red;">Free</b></center>
-				</div>
-				<div>
-					<p style="margin-top: 3%;"><center>Number of persons: <input type="Number" name="1" min="0" class="no-of-person"></center></p>
-				</div>
-    				<input type="submit" class="book-now" value="Book Now" style="background-color: red;font-weight: bold;margin-top: 3%;">
-  			</form>
-		</div>
+
+
+			echo "<div class='booking'>";
+  				echo "<form action='' class='booking-form' method='post'>";
+    				echo "<p>Choose Your Team:</p>";
+    					echo "<div class='radio-button'>";
+    						echo "<input type='radio' value='TeamA' name='team' required> Team A(11)";
+							echo "<input type='radio' value='TeamB'  name='team' style='margin-left: 27%;' required> Team B(11)";
+						echo "</div>";
+						echo "<div>";
+							echo "<p style='margin-left: 5%'>Date: <input type='date' name='date' required>";
+					  			echo "<b style='margin-left: 4%;'>Session: </b><select id='session' name='session' required>";
+    								echo "<option value='Morning' class='session-options'>Morning (7am to 10am)</option>";
+    								echo "<option value='Afternoon' class='session-options'>Afternoon (11am to 2pm)</option>";
+    								echo "<option value='Evening' class='session-options'>Evening (3pm to 6pm)</option>";
+  								echo "</select>";
+  							echo "</p>";
+						echo "</div>";
+						echo "<div>";
+							echo "<center>Amount:<b style='margin-left: 2%;color: red;'>".$row['price']."/-</b></center>";
+						echo "</div>";
+						echo "<div>";
+							echo "<p style='margin-top: 3%;''><center>Number of persons: <input type='Number' min='0' class='no-of-person' name='no_of_person' required></center></p>";
+						echo "</div>";
+    					echo "<input type='submit' class='book-now' name='book_now' style='background-color: red;font-weight: bold;margin-top: 3%;'>";
+  				echo "</form>";
+			echo "</div>";
+		?> 
+
 	</main>
-
 	<footer class="footer">
  		<div class="icon-list">
  			<p style="font-family: cursive;">Contact Us In</p>

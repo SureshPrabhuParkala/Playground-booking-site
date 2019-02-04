@@ -1,7 +1,7 @@
 <?php
   include('function.php');
   $func=new dbfunction();
-  $con=$func->connection();  
+  $con=$func->connection();
 ?>
 
 <!DOCTYPE html>
@@ -13,9 +13,20 @@
 <body>
 	<header class="header">
 		<nav class="nav-bar">
-  		<p>Play for Fun</p>
-  		<a href="signup.php">SignUp</a>
-  		<a href="login.php">Login</a>
+  		<a class="logo" href="">Play for Fun</a>
+      <?php
+        session_start();
+        if(isset($_SESSION['login_user']))
+        {
+          echo "<a class='nav_bar' href='logout.php'>Logout</a>
+                <a class='nav_bar'>".$_SESSION['login_user']."</a>";
+        }
+        else
+        {
+  		    echo "<a class='nav_bar' href='signup.php'>SignUp</a>
+  		          <a class='nav_bar' href='login.php'>Login</a>";
+        }
+      ?>
 		</nav>
 	</header>
 

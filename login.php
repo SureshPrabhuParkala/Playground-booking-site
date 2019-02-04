@@ -24,6 +24,11 @@
       $func->adminloginValidation($name, $password, $con);
     }
   }
+
+  if(isset($_POSt['cancel']))
+  {
+    header("location: index.php");
+  }
 ?>
 
 
@@ -38,8 +43,8 @@
 <body>
   <header class="header">
     <nav class="nav-bar">
-      <p>Play for Fun</p>
-      <a href="signup.php">SignUp</a>
+      <a class="logo" href="index.php">Play for Fun</a>
+      <a class="nav_bar" href="signup.php">SignUp</a>
     </nav>
   </header>
 
@@ -52,7 +57,7 @@
     	  <button type="submit" id="login-as-admin" name="adminlogin" style="float: left;width: 45%;">Login as Admin</button>
         <button type="login" id="login-as-user" name="userlogin" style="float: right;width: 45%;">Login as User</button>
         <div>
-    	   <button type="button" id="cancel-button">Cancel</button>
+    	    <a href="index.php"><button type="button" id="cancel-button" name="cancel">Cancel</button></a>
         </div>
         <a href="#" class="forgot-password" style="margin-top: 50%"><center>Forgot Password?</center></a>
 	    </form>

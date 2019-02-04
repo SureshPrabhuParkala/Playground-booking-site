@@ -32,14 +32,22 @@
         {
             $q="SELECT * FROM `user_reg` WHERE user_name='$username' AND password='$password'";
             $result=mysqli_query($con,$q);
-            $count=mysqli_num_rows($result);
-            if($count==1)
+            if(mysqli_num_rows($result)==1)
             {
-                header("location: index.html");
+                session_start();
+                while($row=$result->fetch_assoc())
+                {
+                    $name=$row['user_name'];
+                    $_SESSION['login_user']=$name;
+                    $userid=$row['user_id'];
+                    $_SESSION['login_id']=$userid;
+                    header("location: index.php");
+                }
             }
             else
             {
-                echo "incorrect username or password";
+                echo "<script>alert('Username and Password does not match')</script>";
+                header("location: login.php");
             }
         } 
 
@@ -54,7 +62,8 @@
             }
             else
             {
-                echo "incorrect username or password";
+                echo "<script>alert('Username and Password does not match')</script>";
+                header("location: login.php");
             }
         }
 
@@ -107,14 +116,33 @@
             }
         }
 
-        public function venueview($venuename, $con)
+        // public function venueview($venuename, $spid, $con)
+        // {
+        //     $q="SELECT venue_id from venue WHERE venue_name='$venuename' AND sports_id='$spid'";
+        //     $result=mysqli_query($con,$q);
+        //     while($row=$result->fetch_assoc())
+        //     {
+        //         header('location: venueview.php?id='.$row['venue_id'].'');
+        //     }
+        // }
+
+        public function list_of_venue($venueplace, $id, $con)
         {
-            $q="SELECT venue_id from venue WHERE venue_name='$venuename'";
+            $q="SELECT venue_name, price, venue_id FROM venue WHERE place='$venueplace' AND sports_id='$id'";
+            return mysqli_query($con,$q);
+        }
+
+        public function booking($loginid, $loginuser, $sportsid, $venueid, $date, $teams, $session, $team, $number, $con)
+        {
+            $q="INSERT INTO `booked` (`user_id`, `user_name`, `sports_id`, `venue_id`, `date`, `time`, `team`, `no_of_players`) VALUES ('$loginid', '$loginuser', '$sportsid', '$venueid', '$date', '$session', '$teams', '$number');";
             $result=mysqli_query($con,$q);
-            while($row=$result->fetch_assoc())
+            if($result)
             {
-                header('location: venueview.php?id='.$row['venue_id'].'');
+                header('location: done.html');
             }
+
+            else
+                echo "<script>alert('Error')</script>";
         }
     }
 ?>

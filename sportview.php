@@ -3,11 +3,6 @@
 	$func=new dbfunction();
     $con=$func->connection();
     $id=$_GET['id'];
-    if (isset($_POST['submitvenue'])) 
-    {
-    	$venuename=$_POST['venuename'];
-    	$func->venueview($venuename, $con);
-    }
 ?>
 
 
@@ -20,9 +15,20 @@
 <body>
 	<header class="header">
 		<nav class="nav-bar">
-  			<p>Play for Fun</p>
-  			<a href="signup.php">SignUp</a>
-  			<a href="login.php">Login</a>	
+  			<a class="logo" href="index.php">Play for Fun</a>
+  			<?php
+  				session_start();
+  				if(isset($_SESSION['login_user']))
+        		{
+        			echo "<a class='nav_bar' href='logout.php'>Logout</a>
+          				  <a class='nav_bar'>".$_SESSION['login_user']."</a>";
+          		}
+          		else
+          		{
+  					echo "<a class='nav_bar' href='signup.php'>SignUp</a>
+  						  <a class='nav_bar' href='login.php'>Login</a>";	
+  				}
+  			?>
 		</nav>
 	</header>
 
@@ -43,32 +49,30 @@
   					$result=mysqli_query($con,$q1);
   					if (mysqli_num_rows($result)>0)
   					{
-  						echo "<select id='venue' name='venueplace' style='width: 100%;'>";
+  						echo "<select id='venue' name='venueplace' style='width: 100%;' onchange='javascript:value()'><option class='venue-place-option-value' hidden selected>Select The Place</option>";
   						while($row=$result->fetch_assoc())
   						{
     						echo "<option value='".$row['place']."' class='venue-place-option-value'>".$row['place']."</option>";
     					}
   					}
   					echo "</select>";
-  				?>
 
-  				
-  				<?php
-  					$q2="SELECT venue_name FROM  venue WHERE sports_id='$id';";
-  					$result=mysqli_query($con,$q2);
-  					if(mysqli_num_rows($result)>0)
-  					{
-  						echo "<select id='venue' name='venuename' style='margin-top: 5%;width: 100%;' onchange='check(this);'>";
-  						while($row=$result->fetch_assoc())
-  						{ 
-  							
-    						echo "<option value='".$row['venue_name']."' class='venue-place-option-value'>".$row['venue_name']."</option>";
-    					}
-  				    }
-  				    echo "<input type='submit' class='submit' name='submitvenue'></a>";
+  					
   				?>
+				<input type='submit' class='submit' name='submitvenue'></a>
 			</form>
 		</div>
+
+		<?php
+					if (isset($_POST['submitvenue'])) {
+						$venueplace=$_POST['venueplace'];
+						$result=$func->list_of_venue($venueplace, $id, $con);
+						while($row=$result->fetch_assoc())
+						{
+							echo "<a href='venueview.php?id=".$row['venue_id']."&pid=".$id."' style='text-decoration: none;'><p class='list_of_venue'>".$row['venue_name'].",<b style='color: red;'> ".$row['price']."/-</b> Per Person</p></a>";
+						}
+					}
+				?>
 	</section>
 
 	</main>
