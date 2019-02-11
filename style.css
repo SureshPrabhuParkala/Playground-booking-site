@@ -164,10 +164,10 @@ body{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: #f1f1f1;
   width: 500px;
-  height: 400px;
+  height: 450px;
   margin-left: 32%;
-  margin-bottom: 1%;
-  margin-top: 1%;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
 .done-display {
@@ -448,17 +448,39 @@ input[type=radio]:hover {
   background-color: #2F3236;
 }
 
-.tableview {
+.bookedtableview {
   margin: 2%;
   border: 1px solid black;
   border-collapse: collapse;
   width: 90%;
 }
 
-.tableview tr, th, td {
+.sportstableview {
+  margin: 2%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 35%;
+}
+
+.venuetableview {
+  margin: 2%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+.headings {
+  padding: 2%;
+  font-family: cursive;
+}
+
+.bookedtableview tr, th, td {
   text-align: center;
   border: 2px solid black;
   border-collapse: collapse;
+  padding: 2%;
+  font-size: 20px;
+  font-family: cursive;
 }
 
 .add-sport

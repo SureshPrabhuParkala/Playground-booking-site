@@ -56,10 +56,15 @@
         {
             $q="SELECT * FROM `admin_login` WHERE name='$username' AND password='$password'";
             $result=mysqli_query($this->con,$q);
-            $count=mysqli_num_rows($result);
-            if($count==1)
+            if(mysqli_num_rows($result)==1)
             {
-                header("location: addsport.php");
+                session_start();
+                while($row=$result->fetch_assoc())
+                {
+                    $id=$row['id'];
+                    $_SESSION['admin_id']=$id;
+                    header('location: addsport.php');
+                }
             }
             else
             {
@@ -163,13 +168,17 @@
 
         public function Booking($loginid, $loginuser, $sportsid, $venueid, $date, $session, $team, $number)
         {
-            $q="SELECT * FROM booked WHERE user_id='$loginid' AND venue_id='$venueid'";
+            $query="SELECT maximum_players FROM venue WHERE venue_id='$venueid'";
+            $resq=mysqli_query($this->con, $query);
+            $resqrow=$resq->fetch_assoc();
+            $max=$resqrow['maximum_players']/2;
+            $q="SELECT * FROM booked WHERE user_id='$loginid' AND venue_id='$venueid' AND datee='$date' AND timee='$session'";
             $res=mysqli_query($this->con, $q);
             if(mysqli_num_rows($res)>0)
             {
                 while($row=$res->fetch_assoc())
                 {
-                    $q="SELECT * FROM booked WHERE datee='$date' AND timee='$time'";
+                    $q="SELECT * FROM booked WHERE datee='$date' AND timee='$session'";
                     $teama=$row['team_a'];
                     $teamb=$row['team_b'];
                     $res1=mysqli_query($this->con, $q);
@@ -181,10 +190,15 @@
                                 $teama=$teama+$number;
                             else
                                 $teama=$number;
-                            $q2="UPDATE booked SET team_a=$teama WHERE user_id='$loginid' AND datee='$date' AND timee='$session'";
-                            $res2=mysqli_query($this->con, $q2);
-                            if($res2)
-                                header('location: done.php?$t='.$team.'&$num='.$number.'');
+                            if($teama<=$max)
+                            {
+                                $q2="UPDATE booked SET team_a=$teama WHERE user_id='$loginid' AND datee='$date' AND timee='$session'";
+                                $res2=mysqli_query($this->con, $q2);
+                                if($res2)
+                                    header('location: done.php?t='.$team.'&num='.$number.'&sport='.$sportsid.'&venue='.$venueid.'&time='.$session.'&date='.$date);
+                            }
+                            else
+                                echo "<script>alert('$number Seats are not Available in Team A');</script>";
                         }
                         elseif($team == "TeamB")
                         {
@@ -192,11 +206,16 @@
                                 $teamb=$teamb+$number;
                             else
                                 $teamb=$number;
-                            $q3="UPDATE booked SET team_b=$teamb WHERE user_id='$loginid' AND datee='$date' AND
-                                timee='$session'";
-                            $res3=mysqli_query($this->con, $q3);
-                            if($res3)
-                                header('location: done.php?$t='.$team.'&$num='.$number.'');
+                            if($teamb<=$max)
+                            {
+                                $q3="UPDATE booked SET team_b=$teamb WHERE user_id='$loginid' AND datee='$date' AND
+                                    timee='$session'";
+                                $res3=mysqli_query($this->con, $q3);
+                                if($res3)
+                                    header('location: done.php?t='.$team.'&num='.$number.'&sport='.$sportsid.'&venue='.$venueid.'&time='.$session.'&date='.$date);
+                            }
+                            else
+                                echo "<script>alert('$number Seats are not Available in Team B');</script>";
                         }    
                     }
                 }
@@ -205,17 +224,27 @@
             {
                 if($team == "TeamA")
                 {
-                    $q4="INSERT INTO `booked` (`user_id`, `user_name`, `sports_id`, `venue_id`, `datee`, `timee`, `team_a`) VALUES ('$loginid', '$loginuser', '$sportsid', '$venueid', '$date', '$session', '$number');";
-                    $result=mysqli_query($this->con, $q4);
-                    if($result)
-                        header('location: done.php?$t='.$team.'&$num='.$number.'');
+                    if($number<=$max)
+                    {
+                        $q4="INSERT INTO `booked` (`user_id`, `user_name`, `sports_id`, `venue_id`, `datee`, `timee`, `team_a`) VALUES ('$loginid', '$loginuser', '$sportsid', '$venueid', '$date', '$session', '$number');";
+                        $result=mysqli_query($this->con, $q4);
+                        if($result)
+                            header('location: done.php?t='.$team.'&num='.$number.'&sport='.$sportsid.'&venue='.$venueid.'&time='.$session.'&date='.$date);
+                    }
+                    else
+                        echo "<script>alert('$number Seats are not Available in Team A');</script>";
                 }
                 elseif($team == "TeamB")
                 {
-                    $q5="INSERT INTO `booked` (`user_id`, `user_name`, `sports_id`, `venue_id`, `datee`, `timee`, `team_b`) VALUES ('$loginid', '$loginuser', '$sportsid', '$venueid', '$date', '$session', '$number');";
-                    $result=mysqli_query($this->con, $q5);  
-                    if($result)
-                        header('location: done.php?$t='.$team.'&$num='.$number.'');
+                    if($number<=$max)
+                    {
+                        $q5="INSERT INTO `booked` (`user_id`, `user_name`, `sports_id`, `venue_id`, `datee`, `timee`, `team_b`) VALUES ('$loginid', '$loginuser', '$sportsid', '$venueid', '$date', '$session', '$number');";
+                        $result=mysqli_query($this->con, $q5);  
+                        if($result)
+                            header('location: done.php?t='.$team.'&num='.$number.'&sport='.$sportsid.'&venue='.$venueid.'&time='.$session.'&date='.$date);
+                    }
+                    else
+                        echo "<script>alert('$number Seats are not Available in /team B');</script>";
                 }
                 else
                     echo "<script>alert('Error')</script>";
@@ -295,6 +324,13 @@
         public function venuetable()
         {
             $q="SELECT * FROM venue";
+            $result=mysqli_query($this->con, $q);
+            return $result;
+        }
+
+        public function admintable()
+        {
+            $q="SELECT * FROM admin_login";
             $result=mysqli_query($this->con, $q);
             return $result;
         }

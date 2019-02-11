@@ -1,8 +1,12 @@
 <?php
 	include('function.php');
 	$func=new dbfunction();
-	$team=$_GET['$t'];
-	$player=$_GET['$num'];
+	$team=$_GET['t'];
+	$player=$_GET['num'];
+	$sportid=$_GET['sport'];
+	$venueid=$_GET['venue'];
+	$time=$_GET['time'];
+	$date=$_GET['date'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,26 +30,24 @@
 		<div class="done-card">
 			<p class="done-text">Done</p>
 			<?php
-				$result=$func->BookingDisplay($_SESSION['login_user']);
+				$result=$func->FetchSportName($sportid);
 				$row=$result->fetch_assoc();
-				$result1=$func->FetchSportName($row['sports_id']);
+				$result1=$func->FetchVenueTable($venueid);
 				$row1=$result1->fetch_assoc();
-				$result2=$func->FetchVenueTable($row['venue_id']);
-				$row2=$result2->fetch_assoc();
-				$price=$row2['price'];
+				$price=$row1['price'];
 				$amount=$price*$player;
-				echo "<p class='done-display'>Name : ".$row['user_name']."</p>
-					  <p class='done-display'>User_Id : ".$row['user_id']."</p>
-					  <p class='done-display'>Sport : ".$row1['sports_name']."</p>
-					  <p class='done-display'>Venue : ".$row2['venue_name']."</p>
-					  <p class='done-display'>Place : ".$row2['place']."</p>
-					  <p class='done-display'>Time : ".$row['timee']."</p>
+				echo "<p class='done-display'>Name : ".$_SESSION['login_user']."</p>
+					  <p class='done-display'>User_Id : ".$_SESSION['login_id']."</p>
+					  <p class='done-display'>Sport : ".$row['sports_name']."</p>
+					  <p class='done-display'>Venue : ".$row1['venue_name']."</p>
+					  <p class='done-display'>Place : ".$row1['place']."</p>
+					  <p class='done-display'>Time : ".$time."</p>
+					  <p class='done-display'>Date : ".$date."</p>
 					  <p class='done-display'>Team : ".$team."</p>
 					  <p class='done-display'>No.Of Players : ".$player."</p>
 					  <p class='done-display'>Amount : ".$amount."/-</p>";
 			?>
-		</div>
-		<p class="enjoy">Enjoy The Day</p>
+		</div> 
 	</main>	
 
 	<footer class="footer">

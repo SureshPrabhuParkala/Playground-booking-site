@@ -1,6 +1,7 @@
 <?php
   include('function.php');
   $func=new dbfunction();
+  session_start();
   if(isset($_POST['add'])) 
   {
     $filename=$_FILES["file"]["name"];
@@ -23,8 +24,9 @@
 	<header class="header">
 		<nav class="nav-bar">
   			<a class="logo">Play for Fun</a>
-  			<a class="nav_bar" href="index.php">Logout</a>
-        <a class="nav_bar" href="addvenue.php">Add Venue</a>	
+  			<a class="nav_bar" href="logout.php">Logout</a>
+        <a class="nav_bar" href="addvenue.php">Add Venue</a>
+        <a class="nav_bar" href="adminview.php">View Table</a>
 		</nav>
 	</header>
 

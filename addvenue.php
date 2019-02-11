@@ -1,7 +1,6 @@
 <?php
   include('function.php');
   $func=new dbfunction();
-
   if (isset($_POST['addvenue'])) 
   {
       $placename=$_POST['placename'];
@@ -30,8 +29,10 @@
 	<header class="header">
 		<nav class="nav-bar">
   			<a href="" class="logo">Play for Fun</a>
-  			<a class="nav_bar" href="index.php">Logout</a>
-        	<a class="nav_bar" href="addsport.php">Add Sport</a>	
+  			<a class="nav_bar" href="logout.php">Logout</a>
+        <a class="nav_bar" href="addsport.php">Add Sport</a>
+        <a class="nav_bar" href="adminview.php">View Table</a>
+
 		</nav>
 	</header>
 
