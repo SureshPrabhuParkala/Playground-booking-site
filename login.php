@@ -5,24 +5,14 @@
   {
       $name=$_POST['username'];
       $password=$_POST['password'];
-
-      $con=$func->connection();
-      if($con)
-      {
-        $func->loginValidation($name, $password, $con);
-      }
+      $func->loginValidation($name, $password);
   }
 
   if(isset($_POST['adminlogin']))
   {
     $name=$_POST['username'];
     $password=$_POST['password'];
-
-    $con=$func->connection();
-    if($con)
-    {
-      $func->adminloginValidation($name, $password, $con);
-    }
+    $func->adminloginValidation($name, $password);
   }
 
   if(isset($_POSt['cancel']))

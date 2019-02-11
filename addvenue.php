@@ -1,7 +1,6 @@
 <?php
   include('function.php');
   $func=new dbfunction();
-  $con=$func->connection();
 
   if (isset($_POST['addvenue'])) 
   {
@@ -15,11 +14,7 @@
       if (isset($_FILES['file']['name']))
         $filename=$_FILES['file']['name'];
 
-
-      if($con)
-      {
-        $func->uploadvenue($placename, $venuename, $details, $price, $maxplayers, $sport, $filename, $con);
-      }
+      $func->uploadvenue($placename, $venuename, $details, $price, $maxplayers, $sport, $filename);
   }
 ?>
 
@@ -34,9 +29,9 @@
 <body>
 	<header class="header">
 		<nav class="nav-bar">
-  			<p>Play for Fun</p>
-  			<a href="index.php">Logout</a>
-        	<a href="addsport.php">Add Sport</a>	
+  			<a href="" class="logo">Play for Fun</a>
+  			<a class="nav_bar" href="index.php">Logout</a>
+        	<a class="nav_bar" href="addsport.php">Add Sport</a>	
 		</nav>
 	</header>
 
@@ -51,8 +46,7 @@
         		<input type="number" placeholder="Maximum Players" id="maxplayers" name="maxplayers" min="1" required>
 
               <?php
-                $q="SELECT sports_name FROM sports";
-                $result=mysqli_query($con,$q);
+                $result=$func->sportnamedropdown();
                 if(mysqli_num_rows($result)>0)
                 {
                   echo "<select id='sports-list' name='sport'>";

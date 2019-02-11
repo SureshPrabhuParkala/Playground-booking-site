@@ -1,7 +1,6 @@
 <?php
 	include('function.php');
 	$func=new dbfunction();
-    $con=$func->connection();
     $id=$_GET['id'];
 ?>
 
@@ -21,7 +20,7 @@
   				if(isset($_SESSION['login_user']))
         		{
         			echo "<a class='nav_bar' href='logout.php'>Logout</a>
-          				  <a class='nav_bar'>".$_SESSION['login_user']."</a>";
+          				  <a class='nav_bar' href='userhistory.php'>".$_SESSION['login_user']."</a>";
           		}
           		else
           		{
@@ -33,8 +32,7 @@
 	</header>
 
 	 <?php
-	 	$q="SELECT * FROM sports WHERE sports_id='$id'";
-	 	$result=mysqli_query($con,$q);
+	 	$result=$func->Sports($id);
         $row=$result->fetch_assoc();
         echo "<main><div style='height:215px;'>
         <div class='left'><img class='detail-img' src='".$row['sports_image']."' alt='Cricket'></div>
@@ -45,8 +43,7 @@
 		<div class="venue-selector">
 			<form action="" method="post" class="venue-dropdown" style="padding-left: 5%;">
 				<?php
-  					$q1="SELECT DISTINCT place FROM venue WHERE sports_id='$id';";
-  					$result=mysqli_query($con,$q1);
+  					$result=$func->placedropdown($id);
   					if (mysqli_num_rows($result)>0)
   					{
   						echo "<select id='venue' name='venueplace' style='width: 100%;' onchange='javascript:value()'><option class='venue-place-option-value' hidden selected>Select The Place</option>";
@@ -66,7 +63,7 @@
 		<?php
 					if (isset($_POST['submitvenue'])) {
 						$venueplace=$_POST['venueplace'];
-						$result=$func->list_of_venue($venueplace, $id, $con);
+						$result=$func->list_of_venue($venueplace, $id);
 						while($row=$result->fetch_assoc())
 						{
 							echo "<a href='venueview.php?id=".$row['venue_id']."&pid=".$id."' style='text-decoration: none;'><p class='list_of_venue'>".$row['venue_name'].",<b style='color: red;'> ".$row['price']."/-</b> Per Person</p></a>";

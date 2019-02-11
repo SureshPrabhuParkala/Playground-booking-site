@@ -6,12 +6,7 @@
     $filename=$_FILES["file"]["name"];
     $name=$_POST['name'];
     $details=$_POST['details'];
-
-    $con=$func->connection();
-    if($con)
-    {
-      $func->uploadsport($name, $details, $filename, $con);
-    }
+    $func->uploadsport($name, $details, $filename);
   }
 ?>
 
@@ -27,9 +22,9 @@
 <body>
 	<header class="header">
 		<nav class="nav-bar">
-  			<p>Play for Fun</p>
-  			<a href="index.php">Logout</a>
-        <a href="addvenue.php">Add Venue</a>	
+  			<a class="logo">Play for Fun</a>
+  			<a class="nav_bar" href="index.php">Logout</a>
+        <a class="nav_bar" href="addvenue.php">Add Venue</a>	
 		</nav>
 	</header>
 

@@ -1,7 +1,6 @@
 <?php
   include('function.php');
   $func=new dbfunction();
-  $con=$func->connection();
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +18,7 @@
         if(isset($_SESSION['login_user']))
         {
           echo "<a class='nav_bar' href='logout.php'>Logout</a>
-                <a class='nav_bar'>".$_SESSION['login_user']."</a>";
+                <a class='nav_bar' href='userhistory.php'>".$_SESSION['login_user']."</a>";
         }
         else
         {
@@ -32,8 +31,7 @@
 
   <main>
     <?php
-      $q="SELECT * FROM sports";
-      $result=mysqli_query($con,$q);
+      $result=$func->index();
       if(mysqli_num_rows($result)>0)
       {
         while($row=$result->fetch_assoc())
