@@ -184,6 +184,7 @@ body{
   background-color: #f1f1f1;
   width: 300px;
   height: 250px;
+  -webkit-transition: 0.3s;
 }
 
 .history-card {
